@@ -2,7 +2,7 @@
     <div class="card p-10">
         {{-- Title --}}
         <div class="text-3xl mb-10">
-            {{__('create a new post')}}
+            {{__('Edit your post')}}
         </div>
         {{-- End Title --}}
 
@@ -21,10 +21,11 @@
         {{-- End Errors --}}
 
         {{-- Form --}}
-        <form action="/p/create" method="post" class="w-full" enctype="multipart/form-data">
+        <form action="/p/{{$post->slug}}/update" method="post" class="w-full" enctype="multipart/form-data">
             @csrf
-            <x-create-edit-form />
-            <x-primary-button class="mt-4">{{__('Create Post')}}</x-primary-button>
+            @method('PATCH')
+            <x-create-edit-form :post="$post"/>
+            <x-primary-button class="mt-4">{{__('Update Post')}}</x-primary-button>
         </form>
         {{-- End Form --}}
     </div>
