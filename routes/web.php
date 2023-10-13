@@ -32,6 +32,8 @@ require __DIR__.'/auth.php';
 
 Route::get('/explore' , [PostController::class , 'explore'])->name('explore');
 Route::get('/{user:username}' , [UserController::class , 'index'])->middleware('auth')->name('user_profile');
+Route::get('/{user:username}/edit' , [UserController::class , 'edit'])->middleware('auth')->name('user_edit');
+Route::patch('/{user:username}/update' , [UserController::class , 'update'])->middleware('auth')->name('user_update');
 
 Route::controller(PostController::class)->middleware('auth')->group(function()
 {

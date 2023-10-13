@@ -2,7 +2,7 @@
     <div class="h-screen md:flex md:flex-row flex">
         {{-- Left Side --}}
         <div class="flex h-full items-center overflow-hidden bg-black md:w-7/12">
-            <img src="{{asset('storage').'/' .$post->image}}" class="h-auto w-full">
+            <img src="/{{$post->image}}" class="h-auto w-full">
         </div>
         {{-- End Left Side --}}
         {{-- Right Side --}}

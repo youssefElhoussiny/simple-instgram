@@ -9,7 +9,7 @@
     <div class="card-body">
         <div class="max-h-[35rem] overflow-hidden">
             {{-- {{asset("storage/".$post->image)}} --}}
-            <img src="{{ asset('storage/'. $post->image) }}" class="h-auto w-full object-cover" alt=" {{ $post->description }}">
+            <img src="{{  $post->image}}" class="h-auto w-full object-cover" alt=" {{ $post->description }}">
         </div>
         <div class="p-3">
             <a href="/{{$post->owner->username}}" class="font-bold mr-1">{{$post->owner->username}}</a>

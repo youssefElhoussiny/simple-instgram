@@ -1,4 +1,7 @@
 <x-app-layout>
+    <div class="{{session('success') ? '' : 'hidden'}} w-50 p-4 text-sm text-green-700 bg-green-100 rounded-lg absolute right-10 shadow shadow-neutral-200" role="alert">
+        <span class="font-medium">{{session('success')}}</span>
+    </div>
     <div class="grid grid-cols-4 mt-5">
         {{-- User Image --}}
         <div class="px-4 col-span-1 order-1">
