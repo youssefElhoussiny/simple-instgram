@@ -6,7 +6,19 @@
 @layer components
 {  .card
     {
-        @apply flex flex-col bg-white my-4 rounded-xl border border-gray-200;
+        @apply flex flex-col bg-white my-4 rounded-xl border border-gray-200 ;
+    }
+    .card-header
+    {
+        @apply flex flex-row items-center p-5;
+    }
+    .card-body
+    {
+
+    }
+    .card-footer
+    {
+        @apply border-t border-t-gray-200 p-3 mt-5;
     }
 }
 @layer utilities {
