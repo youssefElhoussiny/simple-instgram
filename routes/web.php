@@ -3,6 +3,7 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,9 +28,10 @@ use Illuminate\Support\Facades\Route;
 //     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
+require __DIR__.'/auth.php';
 
 Route::get('/explore' , [PostController::class , 'explore'])->name('explore');
-
+Route::get('/{user:username}' , [UserController::class , 'index'])->middleware('auth')->name('user_profile');
 
 Route::controller(PostController::class)->middleware('auth')->group(function()
 {
@@ -43,4 +45,3 @@ Route::controller(PostController::class)->middleware('auth')->group(function()
 }); 
 
 Route::post('/p/{post:slug}/comment' , [CommentController::class , 'store'])->name('store_comment')->middleware('auth');
-require __DIR__.'/auth.php';
