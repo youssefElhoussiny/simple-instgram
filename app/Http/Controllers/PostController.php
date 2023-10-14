@@ -49,6 +49,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        // dd($post->likes()->count());
         return view('posts.show' , compact('post'));
     }
 
