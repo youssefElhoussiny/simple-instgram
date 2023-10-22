@@ -16,6 +16,16 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+                @guest
+                    <div class="hidden md:flex md:items-center md:space-x-2">
+                        <div class="space-x-3 text-[1.6rem] ltr:mr-5 rtl:ml-5">
+                            <a href="/login"
+                               class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest ltr:mr-2 rtl:ml-2">{{ __('Login') }}</a>
+                            <a href="/register"
+                               class="inline-flex items-center px-4 py-2 font-semibold text-xs uppercase tracking-widest">{{ __('Register') }}</a>
+                        </div>
+                    </div>
+                @endguest
                 @auth
                     <div class="flex items-center space-x-3">
                         <div class="space-x-3 text-[1.6rem] mr-2 leading-5">
@@ -45,18 +55,20 @@
                             </a>
                         </div>
                     </div>
-                @endauth
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                       <div class="ml-3">
-                        <img src="{{auth()->user()->image}}" class="w-6 h-6 rounded-full">
-                       </div>
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('user_profile' , ['user'=>auth()->user()->username])">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
+                    <div class="hidden md:block">
+                        
+         
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <div class="ml-3">
+                                    <img src="{{auth()->user()->image}}" class="w-6 h-6 rounded-full">
+                                </div>
+                            </x-slot>
+                            
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('user_profile' , ['user'=>auth()->user()->username])">
+                                    {{ __('Profile') }}
+                                </x-dropdown-link>
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -71,6 +83,8 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+        </div>
+        @endauth
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
@@ -89,28 +103,32 @@
         
 
         <!-- Responsive Settings Options -->
+        
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+            @auth
+                
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
             </div>
-
+            
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('user_profile' , ['user'=>auth()->user()->username])">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
-
+                
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-
+                    
                     <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                    onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
             </div>
+            @endauth
         </div>
     </div>
 </nav>

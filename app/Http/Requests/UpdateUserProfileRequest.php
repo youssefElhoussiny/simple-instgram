@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 use function Laravel\Prompts\password;
@@ -14,7 +16,8 @@ class UpdateUserProfileRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        // $user = User::find($this->route('user')->id);
+        return Gate::allows('edit-update-profile' , $this->user);
     }
 
     /**

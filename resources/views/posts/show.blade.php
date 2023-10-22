@@ -14,25 +14,30 @@
                     <div class="grow">
                         <a href="/{{$post->owner->username}}" class="font-bold">{{$post->owner->username}}</a>
                     </div>
-                    @if ($post->owner->id == auth()->id())
-                        <a href="/p/{{$post->slug}}/edit"><i class="bx bx-message-square-edit"></i></a>
-
-                        <form action="/p/{{$post->slug}}/delete" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" onclick="return confirm('Are you sure?')">
-                                <i class="bx bx-message-square ml-2 text-xl text-red-600"></i>
-                            </button>
-                        </form>
-                    @elseif (auth()->user()->is_following($post->owner))
-                        <a href="/{{$post->owner->username}}/unfollow" class="w-30 text-blue-400 text-sm font-bold px-3 text-center ">
-                            {{__('Unfollow')}}
-                        </a>
+                    @can('update' , $post)
+                        
+                    <a href="/p/{{$post->slug}}/edit"><i class="bx bx-message-square-edit"></i></a>
+                    
+                    <form action="/p/{{$post->slug}}/delete" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" onclick="return confirm('Are you sure?')">
+                            <i class="bx bx-message-square ml-2 text-xl text-red-600"></i>
+                        </button>
+                    </form>
+                    @endcan
+                    @cannot('update' , $post)
+                        
+                    @if (auth()->user()->is_following($post->owner))
+                    <a href="/{{$post->owner->username}}/unfollow" class="w-30 text-blue-400 text-sm font-bold px-3 text-center ">
+                        {{__('Unfollow')}}
+                    </a>
                     @else
                     <a href="/{{$post->owner->username}}/follow" class="w-30 text-blue-400 text-sm font-bold px-3 text-center ">
                         {{__('follow')}}
                     </a>
                     @endif
+                    @endcannot
 
                 </div>
             </div>

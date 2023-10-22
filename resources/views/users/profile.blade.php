@@ -12,10 +12,12 @@
         {{-- UserName and Buttons --}}
         <div class="px-4 col-span-2 md:ml-0 flex flex-col order-2 md:col-span-3">
             <div class="text-3xl mb-3">{{$user->username}}</div>
+            @auth
+                
             @if ($user->id == auth()->id())
-                <a href="/{{$user->username}}/edit" class="w-44 border text-sm font-bold py-1 rounded-md border-neutral-300 text-center">
-                    {{__('Edit Profile')}}
-                </a>
+            <a href="/{{$user->username}}/edit" class="w-44 border text-sm font-bold py-1 rounded-md border-neutral-300 text-center">
+                {{__('Edit Profile')}}
+            </a>
             @elseif (auth()->user()->is_following($user))
             <a href="/{{$user->username}}/unfollow" class="w-30 bg-blue-400 text-white px-3 rounde text-center self-start ">{{__('Unfollow')}}</a>
             @elseif (auth()->user()->is_pending($user))
@@ -26,6 +28,7 @@
             <a href="/{{$user->username}}/follow" class="w-30 bg-blue-400 text-white px-3 py1 rounded text-center self-start ">
             {{__('Follow')}}</a>
             @endif
+            @endauth
         </div>
 
         {{-- User Info --}}
