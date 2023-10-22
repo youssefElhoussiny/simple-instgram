@@ -16,6 +16,15 @@
                 <a href="/{{$user->username}}/edit" class="w-44 border text-sm font-bold py-1 rounded-md border-neutral-300 text-center">
                     {{__('Edit Profile')}}
                 </a>
+            @elseif (auth()->user()->is_following($user))
+            <a href="/{{$user->username}}/unfollow" class="w-30 bg-blue-400 text-white px-3 rounde text-center self-start ">{{__('Unfollow')}}</a>
+            @elseif (auth()->user()->is_pending($user))
+            <span class="w-30 bg-gray-400 text-white px-3 py-1 rounded text-center self-start">
+                {{__('Pending')}}
+            </span>
+            @else
+            <a href="/{{$user->username}}/follow" class="w-30 bg-blue-400 text-white px-3 py1 rounded text-center self-start ">
+            {{__('Follow')}}</a>
             @endif
         </div>
 
@@ -35,12 +44,30 @@
                     </div>
                     <span class='text-neutral-500 md:text-black ml-2'>{{$user->posts()->count() > 1 ? 'posts' : 'post'}}</span>
                 </li>
+                <li class="flex flex-col md:flex-row text-center">
+                    <div class="md:mr-1 font-bold md:font-normal">
+                        {{$user->followers()->count()}}
+                    </div>
+                    <span class="text-neutral-500 md:text-black">
+                        {{$user->followers()->count()>1 ? __('followers') : __('follower')}}
+                    </span>
+
+                </li>
+                <li class="flex flex-col md:flex-row text-center">
+                    <div class="md:mr-1 font-bold md:font-normal">
+                        {{$user->following()->wherePivot('confirmed' , true)->get()->count()}}
+                    </div>
+                    <span class="text-neutral-500 md:text-black">
+                        {{__('following')}}
+                    </span>
+                    
+                </li>
             </ul>
         </div>
     </div>
 
     {{-- Posts --}}
-    @if ($user->posts()->count() > 0 and ($user->private_account == false or auth()->id() == $user->id))
+    @if ($user->posts()->count() > 0 and ($user->private_account == false or auth()->id() == $user->id or auth()->user()->is_following($user)))
         <div class="grid grid-cols-3 gap-4 my-5">
              @foreach ($user->posts as $post)
                 <a class="aspect-square block w-full" href="/p/{{ $post->slug }}">

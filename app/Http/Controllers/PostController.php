@@ -14,8 +14,11 @@ class PostController extends Controller
      */
     public function index()
     {
-       $posts = Post::all();
-       $suggested_users = auth()->user()->suggested_users();
+        $ids = auth()->user()->following()->wherePivot('confirmed' , true)->get()->pluck('id')->flatten()->toArray();
+        $posts = Post::whereIn('user_id' , $ids)->latest()->get();
+
+        $suggested_users = auth()->user()->suggested_users();
+
         return view('posts.index' , compact(["posts" , "suggested_users"]));
     }
 
@@ -49,7 +52,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        // dd($post->likes()->count());
+        // dd($post->likes());
         return view('posts.show' , compact('post'));
     }
 
