@@ -27,16 +27,8 @@
                     </form>
                     @endcan
                     @cannot('update' , $post)
-                        
-                    @if (auth()->user()->is_following($post->owner))
-                    <a href="/{{$post->owner->username}}/unfollow" class="w-30 text-blue-400 text-sm font-bold px-3 text-center ">
-                        {{__('Unfollow')}}
-                    </a>
-                    @else
-                    <a href="/{{$post->owner->username}}/follow" class="w-30 text-blue-400 text-sm font-bold px-3 text-center ">
-                        {{__('follow')}}
-                    </a>
-                    @endif
+                   {{-- <livewire:follow :post="$post" :userId="$post->owner->id"/> --}}
+                    <livewire:follow-button :userId="$post->owner->id" classes="text-blue-500"/>
                     @endcannot
 
                 </div>
@@ -70,6 +62,15 @@
                     </div>
                 @endforeach
             </div>
+            {{-- Like && Comment --}}
+            <div class="p-3 flex flex-row border-t">
+                <livewire:like :post="$post" />
+                <a class="grow" onclick="document.getElmentById('comment_body').focus()">
+                    <i class="bx bx-comment text-3xl hover:text-gray-400 cursor-pointer mr-3"></i>
+                </a>
+                <livewire:likedby :post="$post"/>
+            </div>
+            {{--End  Like && Comment --}}
 
             <div class="border-t-2 p-5"> 
                  @error('body')

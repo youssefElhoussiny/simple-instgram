@@ -28,7 +28,7 @@
                 @endguest
                 @auth
                     <div class="flex items-center space-x-3">
-                        <div class="space-x-3 text-[1.6rem] mr-2 leading-5">
+                        <div class="space-x-3 text-[1.6rem] mr-2 leading-5 flex">
                             <a href="{{route('home_page')}}">
                                 {!!
                                 url()->current() == route('home_page')
@@ -45,14 +45,27 @@
 
                                 !!}
                             </a>
-                            <a href="{{route('create_post')}}">
-                                {!!
-                                url()->current() == route('create_post')
-                                ? '<i class="bx bxs-message-square-add"></i>' 
-                                : '<i class="bx bx-message-square-add"></i>' 
-
-                                !!}
-                            </a>
+                            <button onclick="Livewire.dispatch('openModal', { component: 'create-post-modal' })">
+                                
+                                <i class="bx bx-message-square-add "></i>
+                            </button>
+                            <div class="hidden md:block">
+                                <x-dropdown align="right" width="96">
+                                    <x-slot name="trigger">
+                                        <button class="text-[1.6rem] ltr:mr-2 rtl:ml-2 leading-5">
+                                            <div class="relative">
+                                                <i class="bx bxs-inbox"></i>
+                                                <livewire:pending-followers-count />
+                                            </div>
+                                        </button>
+                                    </x-slot>
+    
+                                    <x-slot name="content">
+                                        <livewire:pending-followers-list />
+                                    </x-slot>
+                                </x-dropdown>
+                            </div>
+                           
                         </div>
                     </div>
                     <div class="hidden md:block">

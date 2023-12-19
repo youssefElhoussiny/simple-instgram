@@ -12,14 +12,10 @@
             <img src="{{  $post->image}}" class="h-auto w-full object-cover" alt=" {{ $post->description }}">
         </div>
         {{-- likes --}}
-        <div class="p-3">
-            <a href="/p/{{$post->slug}}/like">
-                @if ($post->liked(auth()->user()))                    
-                <i class="bx bxs-heart text-red-600 text-3xl hover:text-gray-400 cursor-pointer mr-3"></i>
-                @else
-                <i class="bx bx-heart text-3xl hover:text-gray-400 cursor-pointer mr-3"></i>
-                @endif
-
+        <div class="p-3 flex flex-row">
+            <livewire:like :post="$post" />
+            <a href="/p/{{$post->slug}}" class="grow">
+                <i class="bx bx-comment text-3xl hover:text-gray-400 cursor-pointer mr-3"></i>
             </a>
         </div>
         {{-- end likes --}}

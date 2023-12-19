@@ -73,7 +73,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class , 'follows' , 'following_user_id' , 'user_id')->withTimestamps()->withPivot('confirmed');
     }
- 
+//  ///////////////////////////////////
     public function follow(User $user)
     {
    
@@ -84,6 +84,7 @@ class User extends Authenticatable
        return $this->following()->attach($user , ['confirmed'=>true]);
     }
 
+    
     public function unfollow(User $user)
     {
         return $this->following()->detach($user);
@@ -99,5 +100,26 @@ class User extends Authenticatable
     public function is_following(User $user)
     {
         return $this->following()->where('following_user_id' , $user->id)->where('confirmed' , true)->exists();
+    }
+    public function toggle_follow(User $user)
+    { 
+        $this->following()->toggle($user);
+        if(!$user->private_account)
+        {
+            $this->following()->updateExistingPivot($user, ['confirmed' => true]);
+        }
+       
+    }
+    public function pending_followers()
+    {
+        return $this->followers()->wherePivot('confirmed',false)->get();
+    }
+    public function confirm(User $user)
+    {
+        return $this->followers()->updateExistingPivot($user,['confirmed'=>true]);
+    }
+    public function deleteFollowReques(User $user)
+    {
+        return $this->followers()->detach($user);
     }
 }

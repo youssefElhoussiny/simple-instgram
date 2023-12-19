@@ -1,15 +1,7 @@
 <x-app-layout>
     <div class="flex flex-row max-w3xl gap-8 mx-auto">
         {{-- Left Side --}}
-        <div class="w-[30rem] mx-auto lg:w-[95rem]">
-            @forelse ($posts as $post)
-            <x-post :post="$post"/>
-            @empty
-                <div class="max-w-2xl gap-8 mx-auto">
-                    {{__('Start Following Your Freinds And Enjoy')}}
-                </div>
-            @endforelse
-        </div>
+        <livewire:posts-list />
         {{-- End Left Side --}}
 
         {{-- Right Side --}}
@@ -47,18 +39,13 @@
                                 </div>
                                 <div class="text-gray-500 text-sm">{{$suggested_user->name}}</div>
                             </div>
-                            @if (auth()->user()->is_pending($suggested_user))
-                                <span class="text-gray-500 font-bold">{{__('Pending')}}</span>
-                            @else
-                                
-                            <a href="/{{$suggested_user->username}}/follow" class="text-blue-500 font-bold">
-                            {{__('Follow')}}
-                            </a>
-                           
-                            @endif
+                            
+                        <livewire:follow-button  :userId="$suggested_user->id" classes="text-blue-500"/>
+
                         </li>
                     @endforeach
                 </ul>
+                
             </div>
         </div>
         
