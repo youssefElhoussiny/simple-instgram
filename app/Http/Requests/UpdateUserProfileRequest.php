@@ -34,6 +34,7 @@ class UpdateUserProfileRequest extends FormRequest
             'name' =>'required',
             'email' => ['required' , 'email' , Rule::unique('users','email')->ignore($this->user())],
             'password' => ['nullable','min:8' , 'confirmed'],
+            'lang'=>'required',
         ];
     }
 }

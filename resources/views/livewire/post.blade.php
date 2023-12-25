@@ -2,7 +2,7 @@
     {{-- Header --}}
     <div class="card-header">
         <img src="{{$post->owner->image}}" class="w-9 h-9 mr-3 rounded-full "/>
-        <a href="/{{$post->owner->username}}" class="font-bold">{{$post->owner->username}}</a>
+        <a href="/{{$post->owner->username}}" class="font-bold rtl:mr-2">{{$post->owner->username}}</a>
     </div>
 
     {{-- Body --}}

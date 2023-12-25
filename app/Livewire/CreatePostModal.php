@@ -16,9 +16,20 @@ class CreatePostModal extends ModalComponent
     }
     public function save_temp()
     {
-        $image=$this->image->store('temp');
-        $this->dispatch('openModal','filters-modal',['image'=>$image]);
+        $this->validate([
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
+        ]);
+
+        if ($this->image) {
+            $image=$this->image->store('posts', 'public');
+            // $this->dispatch('openModal','filters-modal',['image'=>$image]);
+            $this->dispatch('openModal','post-description-modal',['image'=>$image]);
+        } else {
+
+        }
+        $this->image = null;
     }
+   
     public function render()
     {
         return view('livewire.create-post-modal');

@@ -39,7 +39,7 @@
                     <div class="md:ltr:mr-1 md:rtl:ml-1 font-bold md:font-normal">
                         {{$user->posts()->count()}}
                     </div>
-                    <span class='text-neutral-500 md:text-black ml-2'>{{$user->posts()->count() > 1 ? 'posts' : 'post'}}</span>
+                    <span class='text-neutral-500 md:text-black ml-2'>{{$user->posts()->count() > 1 ? __('posts') : __('posts')}}</span>
                 </li>
                 
                 @livewire('follower', ['userId' => $user->id], key($user->id))

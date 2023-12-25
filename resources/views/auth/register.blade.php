@@ -56,4 +56,8 @@
             </x-primary-button>
         </div>
     </form>
+    <div class="w-full sm:max-w-md mt-6 px-6 py-4 text-center font-body flex justify-around text-sm">
+        <a href="/lang-ar">العربية</a>
+        <a href="/lang-en">English</a>
+    </div>
 </x-guest-layout>

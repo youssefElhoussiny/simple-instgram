@@ -44,4 +44,13 @@
             </x-primary-button>
         </div>
     </form>
+    <div class="flex items-center justify-end mt-4">
+        <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('register') }}">
+            {{ __('Register') }}
+        </a>
+    </div>
+    <div class="w-full sm:max-w-md mt-6 px-6 py-4 text-center font-body flex justify-around text-sm">
+        <a href="/lang-ar">العربية</a>
+        <a href="/lang-en">English</a>
+    </div>
 </x-guest-layout>

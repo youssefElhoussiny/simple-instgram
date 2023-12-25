@@ -46,17 +46,17 @@ class UserController extends Controller
         }
         $data['private_account'] = $request->has('private_account');
         $user->update($data->toArray());
-        session()->flash('success' , __('your profile updated'));
+        session()->flash('success' , __('your profile updated',[],$data['lang']));
         return redirect()->route('user_profile' , $user);
     }
-    public function follow(User $user)
-    {
-        auth()->user()->follow($user);
-        return back();
-    }
-    public function unfollow(User $user)
-    {
-        auth()->user()->unfollow($user);
-        return back();
-    }
+    // public function follow(User $user)
+    // {
+    //     auth()->user()->follow($user);
+    //     return back();
+    // }
+    // public function unfollow(User $user)
+    // {
+    //     auth()->user()->unfollow($user);
+    //     return back();
+    // }
 }

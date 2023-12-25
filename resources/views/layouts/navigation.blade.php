@@ -9,6 +9,9 @@
                         <x-application-logo class="block h-auto w-32 fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
+                <div class="hidden sm:flex sm:items-center rtl:mr-4">
+                    <livewire:search />
+                </div>
 
                 <!-- Navigation Links -->
                 
@@ -28,7 +31,7 @@
                 @endguest
                 @auth
                     <div class="flex items-center space-x-3">
-                        <div class="space-x-3 text-[1.6rem] mr-2 leading-5 flex">
+                        <div class="space-x-3 text-[1.6rem] rtl:mr-2 leading-5 flex">
                             <a href="{{route('home_page')}}">
                                 {!!
                                 url()->current() == route('home_page')
@@ -37,17 +40,17 @@
 
                                 !!}
                             </a>
-                            <a href="{{route('explore')}}">
+                            <a href="{{route('explore')}}" class="rtl:mr-2">
                                 {!!
                                 url()->current() == route('explore')
-                                ? '<i class="bx bxs-compass"></i>' 
-                                : '<i class="bx bx-compass"></i>' 
+                                ? '<i class="bx bxs-compass rtl:mr-2"></i>' 
+                                : '<i class="bx bx-compass rtl:mr-2"></i>' 
 
                                 !!}
                             </a>
                             <button onclick="Livewire.dispatch('openModal', { component: 'create-post-modal' })">
                                 
-                                <i class="bx bx-message-square-add "></i>
+                                <i class="bx bx-message-square-add"></i>
                             </button>
                             <div class="hidden md:block">
                                 <x-dropdown align="right" width="96">

@@ -37,10 +37,10 @@ class PostController extends Controller
     {
         $data = $request->validate([
             'description' => ['required'],
-            'image' => ['required','mimes:png,jpg,jpeg,gif']
+            'image' => ['required']
         ]);
-        $image = $request['image']->store('posts' , 'public');
-        $data['image'] = $image;
+        // $image = $request['image']->store('posts' , 'public');
+        // $data['image'] = $image;
         $data['slug'] = Str::random(10);
         auth()->user()->posts()->create($data); 
         return redirect()->back();

@@ -61,6 +61,7 @@
                                     <label for="private_account" class="font-medium text-gray-700">{{ __('Private Account') }}</label>
                                 </div>
                             </div>
+                            
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="lang" class="block text-sm font-medium text-gray-700">{{ __('Language') }}</label>
